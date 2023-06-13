@@ -1,0 +1,5 @@
+services:
+  ansible-playground:
+    build: .
+    container_name: ansible-playground
+    entrypoint: ["tail", "-f", "/dev/null"]
