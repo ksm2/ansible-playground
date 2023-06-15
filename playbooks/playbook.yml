@@ -11,8 +11,12 @@
 
     - name: Copy jar
       copy:
-        src: ./target/ansible-playground-1.0-SNAPSHOT.jar
+        src: ../target/ansible-playground-1.0-SNAPSHOT.jar
         dest: /usr/local/bin/ansible-playground.jar
 
     - name: Run jar
       command: java -jar /usr/local/bin/ansible-playground.jar
+      register: java_output
+
+    - debug:
+        msg: "{{ java_output.stdout }}"
