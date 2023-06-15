@@ -16,5 +16,5 @@ and run a Kotlin application inside a Docker container.
 
 3. Run the Ansible Playbook
    ```bash
-   ansible-playbook -vv -i inventory.cfg playbook.yml
+   ansible-playbook -vv playbook.yml
    ```
