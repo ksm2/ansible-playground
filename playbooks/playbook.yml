@@ -3,8 +3,8 @@
   become: true
   tasks:
     - name: Install required system packages
-      apt:
-        pkg:
+      package:
+        name:
           - default-jre
         state: latest
         update_cache: true
