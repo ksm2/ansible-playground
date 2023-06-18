@@ -9,14 +9,26 @@
         state: latest
         update_cache: true
 
+    - name: Copy dependencies
+      copy:
+        src: ../target/libs
+        dest: /usr/local/bin
+      notify: Restart server
+
     - name: Copy jar
       copy:
         src: ../target/ansible-playground-1.0-SNAPSHOT.jar
         dest: /usr/local/bin/ansible-playground.jar
+      notify: Restart server
 
-    - name: Run jar
-      command: java -jar /usr/local/bin/ansible-playground.jar
-      register: java_output
+    - name: Add a service unit
+      template:
+        src: ../templates/ansible-playground.service.j2
+        dest: /etc/systemd/system/ansible-playground.service
+      notify: Restart server
 
-    - debug:
-        msg: "{{ java_output.stdout }}"
+  handlers:
+    - name: Restart server
+      service:
+        name: ansible-playground
+        state: restarted
